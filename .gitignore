@@ -27,6 +27,3 @@ secure/*
 pnpm-lock.yaml
 *.pem
 *.yaml
-secure/kronos.dev.pem
-secure/kronos.dev-key.pem
-pnpm-lock.yaml
