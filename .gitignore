@@ -11,7 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
-secure
+*.pem
 
 # Editor directories and files
 .vscode/*
@@ -23,3 +23,10 @@ secure
 *.njsproj
 *.sln
 *.sw?
+secure/*
+pnpm-lock.yaml
+*.pem
+*.yaml
+secure/kronos.dev.pem
+secure/kronos.dev-key.pem
+pnpm-lock.yaml
