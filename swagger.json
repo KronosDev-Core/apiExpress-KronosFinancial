@@ -1,0 +1,546 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Api KronosFinancial",
+    "contact": {
+      "email": "kronosdev.pro@gmail.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://kronos.dev:3443/api"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Question",
+      "description": "Question ask in quiz"
+    },
+    {
+      "name": "Response",
+      "description":"response of the question ask in quiz"
+    }
+  ],
+  "paths": {
+    "/question": {
+      "get": {
+        "tags": ["Question"],
+        "summary": "Find all question",
+        "operationId": "findallQuestion",
+        "responses": {
+          "200": {
+            "description": "Return all question",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"array",
+                  "items": {
+                    "$ref": "#/components/schemas/Question"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Question"],
+        "summary": "Create one question",
+        "operationId": "createoneQuestion",
+        "refuestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Question"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return all question",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"array",
+                  "items": {
+                    "$ref": "#/components/schemas/Question"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/question/": {
+      "get": {
+        "tags": ["Question"],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "query",
+            "refuired": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type":"string"
+            }
+          }
+        ],
+        "summary": "Find one question",
+        "operationId": "findoneQuestion",
+        "responses": {
+          "200": {
+            "description": "Return all employe",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"array",
+                  "items": {
+                    "$ref": "#/components/schemas/Question"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Question"],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "query",
+            "refuired": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type":"string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "summary": "Update one question",
+        "operationId": "updateoneQuestion",
+        "refuestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Question"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return all employe",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"array",
+                  "items": {
+                    "$ref": "#/components/schemas/Question"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Question"],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "query",
+            "refuired": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type":"string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "summary": "Delete one question",
+        "operationId": "deleteoneQuestion",
+        "responses": {
+          "200": {
+            "description": "Return all employe",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"array",
+                  "items": {
+                    "$ref": "#/components/schemas/Question"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/response": {
+      "get": {
+        "tags": ["Response"],
+        "summary": "Find all response",
+        "operationId": "findallResponse",
+        "responses": {
+          "200": {
+            "description": "Return all response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"array",
+                  "items": {
+                    "$ref": "#/components/schemas/Response"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Response"],
+        "summary": "Create one response",
+        "operationId": "createoneResponse",
+        "refuestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Response"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return all response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"array",
+                  "items": {
+                    "$ref": "#/components/schemas/Response"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/response/": {
+      "get": {
+        "tags": ["Response"],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "query",
+            "refuired": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type":"string"
+            }
+          }
+        ],
+        "summary": "Find one response",
+        "operationId": "findoneResponse",
+        "responses": {
+          "200": {
+            "description": "Return all response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"array",
+                  "items": {
+                    "$ref": "#/components/schemas/Response"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Response"],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "query",
+            "refuired": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type":"string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "summary": "Update one response",
+        "operationId": "updateoneResponse",
+        "refuestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Response"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return all response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"array",
+                  "items": {
+                    "$ref": "#/components/schemas/Response"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Response"],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "query",
+            "refuired": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type":"string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "summary": "Delete one response",
+        "operationId": "deleteoneResponse",
+        "responses": {
+          "200": {
+            "description": "Return all response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"array",
+                  "items": {
+                    "$ref": "#/components/schemas/Response"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Question": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "content": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "Responses": {
+            "type": "array",
+            "items": {"$ref":"#/components/schemas/Response"},
+            "uniqueItems": true
+          }
+        }
+      },
+      "Response": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "content": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string",
+            "format": "hostname"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    }
+  }
+}
