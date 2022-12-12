@@ -14,7 +14,7 @@ const BuySchema = new Schema(
       type: Date,
       required: !0,
     },
-    Div_Annuel: {
+    Dividende: {
       type: Number,
       required: !0,
     },

@@ -6,10 +6,6 @@ const DividendeSchema = new Schema(
       type: String,
       required: true,
     },
-    Secteur: {
-      type: String,
-      required: true,
-    },
     Date_ExDiv: {
       type: Date,
       required: true,
@@ -18,7 +14,7 @@ const DividendeSchema = new Schema(
       type: Date,
       required: true,
     },
-    Div_Annuel: {
+    Dividende: {
       type: Number,
       required: true,
     },
