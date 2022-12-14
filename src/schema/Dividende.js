@@ -18,6 +18,10 @@ const DividendeSchema = new Schema(
       type: Number,
       required: true,
     },
+    Status: {
+      type: String,
+      required: true,
+    },
   },
   { strict: !0, versionKey: !1 },
 );

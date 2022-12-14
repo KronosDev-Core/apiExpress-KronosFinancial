@@ -2,21 +2,9 @@ const { Schema, model } = require('mongoose');
 
 const BuySchema = new Schema(
   {
-    Symbol: {
-      type: String,
-      required: !0,
-    },
-    Date_ExDiv: {
-      type: Date,
-      required: !0,
-    },
-    Date_Paiement: {
-      type: Date,
-      required: !0,
-    },
-    Dividende: {
-      type: Number,
-      required: !0,
+    IdStockDividende: {
+      type: Schema.Types.ObjectId,
+      ref: 'dividende',
     },
     Open: {
       type: Boolean,

@@ -1,91 +1,6 @@
 const Buy = require('../schema/Buy');
 const { ObjectId } = require('mongoose').Types;
 
-var AGGREGATE = {
-  match: (field, value) => {
-    var res = {
-      $match: {},
-    };
-
-    field.forEach((elem, index) => {
-      res.$match[`${elem}`] = value[index];
-    });
-
-    return res;
-  },
-  lookup: (from, Lfield, Ffield = '_id', as = Lfield) => {
-    return {
-      $lookup: {
-        from: from,
-        localField: Lfield,
-        foreignField: Ffield,
-        as: as,
-      },
-    };
-  },
-  setAfterLookup: (table) => {
-    var res = { $set: {} };
-    res.$set[table] = {
-      $arrayElemAt: [`$${table}`, 0],
-    };
-    return res;
-  },
-  sort: (field, value) => {
-    var res = {
-      $sort: {},
-    };
-
-    field.forEach((elem, index) => {
-      res.$sort[`${elem}`] = value[index];
-    });
-    return res;
-  },
-  arrayElemAt: (field, index) => {
-    return {
-      $arrayElemAt: [field, index],
-    };
-  },
-  toInt: (field) => {
-    return { $toInt: field };
-  },
-  split: (value, delimiter) => {
-    return {
-      $split: [value, delimiter],
-    };
-  },
-  set: (field, value) => {
-    var res = {
-      $set: {},
-    };
-
-    field.forEach((elem, index) => {
-      res.$set[elem] = value[index];
-    });
-    return res;
-  },
-  addFields: (field, value) => {
-    var res = {
-      $addFields: {},
-    };
-
-    field.forEach((elem, index) => {
-      res.$addFields[elem] = value[index];
-    });
-    return res;
-  },
-  graphLookup: (from, startWith, FField, TField, as) => {
-    return {
-      $graphLookup: {
-        from: from,
-        startWith: startWith,
-        connectFromField: FField,
-        connectToField: TField,
-        as: as,
-      },
-    };
-  },
-};
-
 module.exports = {
   Create: (body, res) => {
     console.log(body);
@@ -107,7 +22,41 @@ module.exports = {
       return { message: 'Form content can not be empty' };
     }
 
-    var aggr = [AGGREGATE.match(['_id'], [ObjectId(_id)])];
+    var aggr = [
+      {
+        $match: {
+          _id: ObjectId(_id),
+        },
+      },
+      {
+        $graphLookup: {
+          from: 'dividendes',
+          startWith: '$IdStockDividende',
+          connectFromField: 'IdStockDividende',
+          connectToField: '_id',
+          as: 'stock',
+        },
+      },
+      {
+        $set: {
+          stock: {
+            $arrayElemAt: ['$stock', 0],
+          },
+        },
+      },
+      {
+        $set: {
+          Symbol: '$stock.Symbol',
+          Date_ExDiv: '$stock.Date_ExDiv',
+          Date_Paiement: '$stock.Date_Paiement',
+          Dividende: '$stock.Dividende',
+          Status: '$stock.Status',
+        },
+      },
+      {
+        $unset: ['stock', 'IdStockDividende'],
+      },
+    ];
 
     Buy.model
       .aggregate(aggr)
@@ -119,7 +68,39 @@ module.exports = {
       });
   },
   GetAll: (res) => {
-    var aggr = [AGGREGATE.match([], [])];
+    var aggr = [
+      {
+        $match: {},
+      },
+      {
+        $graphLookup: {
+          from: 'dividendes',
+          startWith: '$IdStockDividende',
+          connectFromField: 'IdStockDividende',
+          connectToField: '_id',
+          as: 'stock',
+        },
+      },
+      {
+        $set: {
+          stock: {
+            $arrayElemAt: ['$stock', 0],
+          },
+        },
+      },
+      {
+        $set: {
+          Symbol: '$stock.Symbol',
+          Date_ExDiv: '$stock.Date_ExDiv',
+          Date_Paiement: '$stock.Date_Paiement',
+          Dividende: '$stock.Dividende',
+          Status: '$stock.Status',
+        },
+      },
+      {
+        $unset: ['stock', 'IdStockDividende'],
+      },
+    ];
 
     Buy.model
       .aggregate(aggr)
